@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Carrera {
+  id       Int       @id @default(autoincrement())
+  nombre   String    @db.VarChar(50)
+  codigo   Int
+  usuarios Usuario[]
+
+  @@map("carreras")
+}
+
+model Grupo {
+  id           Int          @id @default(autoincrement())
+  nombre       String       @db.VarChar(50)
+  creador_id   Int
+  creador      Usuario      @relation("GrupoCreador", fields: [creador_id], references: [id])
+  invitaciones Invitacion[]
+  miembros     Miembro[]
+
+  @@index([creador_id], map: "grupos_creador_id_fkey")
+  @@map("grupos")
+}
+
+model Invitacion {
+  id        Int              @id @default(autoincrement())
+  fecha     DateTime         @db.Date
+  sender_id Int
+  receiver  String           @db.VarChar(50)
+  estado    EstadoInvitacion
+  grupo_id  Int
+  grupo     Grupo            @relation(fields: [grupo_id], references: [id])
+  sender    Usuario          @relation("InvitacionesUsuario", fields: [sender_id], references: [id])
+
+  @@index([grupo_id], map: "invitaciones_grupo_id_fkey")
+  @@index([sender_id], map: "invitaciones_sender_id_fkey")
+  @@map("invitaciones")
+}
+
+model Miembro {
+  id         Int     @id @default(autoincrement())
+  usuario_id Int
+  grupo_id   Int
+  grupo      Grupo   @relation(fields: [grupo_id], references: [id])
+  usuario    Usuario @relation(fields: [usuario_id], references: [id])
+
+  @@index([grupo_id], map: "miembros_grupo_id_fkey")
+  @@index([usuario_id], map: "miembros_usuario_id_fkey")
+  @@map("miembros")
+}
+
+model Usuario {
+  id                   Int          @id @default(autoincrement())
+  nombres              String       @db.VarChar(50)
+  apellidos            String       @db.VarChar(50)
+  fecha                DateTime?    @db.Date
+  nivel                Int?         @db.TinyInt
+  correo               String       @unique @db.VarChar(50)
+  celular              String?      @db.VarChar(50)
+  telefono             String?      @db.VarChar(50)
+  rol                  RolUsuario?
+  carnet               String?      @db.VarChar(50)
+  carrera_id           Int?
+  grupos               Grupo[]      @relation("GrupoCreador")
+  invitacionesEnviadas Invitacion[] @relation("InvitacionesUsuario")
+  miembros             Miembro[]
+  carrera              Carrera?     @relation(fields: [carrera_id], references: [id])
+
+  @@index([carrera_id], map: "usuarios_carrera_id_fkey")
+  @@map("usuarios")
+}
+
+enum EstadoInvitacion {
+  pendiente
+  aceptada
+  rechazada
+}
+
+enum RolUsuario {
+  admin
+  profesor
+  estudiante
+  oficina
+}
