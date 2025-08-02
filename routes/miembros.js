@@ -20,4 +20,4 @@ router.post('/', authorizeRoles(['admin', 'profesor']), miembroController.create
 // DELETE /api/miembros/:id - Eliminar miembro
 router.delete('/:id', authorizeRoles(['admin']), miembroController.delete);
 
-export default router; 
+export default router;

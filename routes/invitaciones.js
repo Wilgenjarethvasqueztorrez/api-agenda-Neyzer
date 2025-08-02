@@ -26,4 +26,4 @@ router.put('/:id', authorizeRoles(['admin', 'profesor', 'estudiante']), invitaci
 // DELETE /api/invitaciones/:id - Eliminar invitación
 router.delete('/:id', authorizeRoles(['admin']), invitacionController.delete);
 
-export default router; 
+export default router;

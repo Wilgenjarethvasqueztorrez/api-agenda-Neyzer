@@ -52,7 +52,9 @@ const authenticateToken = async (req, res, next) => {
       });
     }
 
-    console.log('Error en autenticación:', error);
+
+    console.error('Error en autenticación:', error);
+
     return res.status(500).json({
       success: false,
       message: 'Error interno del servidor'
@@ -124,4 +126,4 @@ export {
   authenticateToken,
   authorizeRoles,
   authorizeOwnerOrAdmin
-}; 
+};

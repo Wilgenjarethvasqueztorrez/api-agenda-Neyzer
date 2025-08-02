@@ -25,7 +25,7 @@ const invitacionController = {
         estado, 
         grupo_id,
         usuario_id,
-        sortBy = 'created_at',
+        sortBy = 'fecha',
         sortOrder = 'desc'
       } = req.query;
 
@@ -38,8 +38,8 @@ const invitacionController = {
       if (usuario_id) where.usuario_id = parseInt(usuario_id);
 
       // Validar ordenamiento
-      const validSortFields = ['created_at', 'updated_at', 'estado'];
-      const sortField = validSortFields.includes(sortBy) ? sortBy : 'created_at';
+      const validSortFields = ['fecha', 'estado', 'grupo_id', 'usuario_id'];
+      const sortField = validSortFields.includes(sortBy) ? sortBy : 'fecha';
       const order = sortOrder === 'asc' ? 'asc' : 'desc';
 
       const [invitaciones, total] = await Promise.all([
@@ -53,18 +53,16 @@ const invitacionController = {
               select: {
                 id: true,
                 nombre: true,
-                descripcion: true,
-                estado: true
               }
             },
-            usuario: {
+            /*usuario: {
               select: {
                 id: true,
-                nombre: true,
-                email: true,
+                nombres: true,
+                correo: true,
                 rol: true
               }
-            }
+            }*/
           }
         }),
         prisma.invitacion.count({ where })
@@ -521,4 +519,4 @@ const invitacionController = {
   }
 };
 
-export default invitacionController; 
+export default invitacionController;

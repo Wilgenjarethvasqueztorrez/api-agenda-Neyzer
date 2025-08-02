@@ -33,4 +33,4 @@ router.post('/:id/miembros', authorizeRoles(['admin', 'profesor']), grupoControl
 // DELETE /api/grupos/:id/miembros/:miembro_id - Eliminar miembro de un grupo
 router.delete('/:id/miembros/:miembro_id', authorizeRoles(['admin', 'profesor']), grupoController.removeMiembro);
 
-export default router; 
+export default router;

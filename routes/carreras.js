@@ -23,4 +23,4 @@ router.put('/:id', authorizeRoles(['admin']), carreraController.update);
 // DELETE /api/carreras/:id - Eliminar carrera
 router.delete('/:id', authorizeRoles(['admin']), carreraController.delete);
 
-export default router; 
+export default router;

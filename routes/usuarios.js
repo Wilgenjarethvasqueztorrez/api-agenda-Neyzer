@@ -23,4 +23,4 @@ router.put('/:id', authorizeRoles(['admin']), usuarioController.update);
 // DELETE /api/usuarios/:id - Eliminar usuario
 router.delete('/:id', authorizeRoles(['admin']), usuarioController.delete);
 
-export default router; 
+export default router;
