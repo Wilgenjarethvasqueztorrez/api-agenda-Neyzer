@@ -32,7 +32,7 @@ const usuarioController = {
       }
 
       // Validar ordenamiento
-      const validSortFields = ['nombres', 'correo', 'rol', 'created_at'];
+      const validSortFields = ['nombres','apellidos', 'correo', 'rol', 'created_at'];
       const sortField = validSortFields.includes(sortBy) ? sortBy : 'nombres';
       const order = sortOrder === 'desc' ? 'desc' : 'asc';
 
@@ -45,9 +45,13 @@ const usuarioController = {
           select: {
             id: true,
             nombres: true,
+            apellidos: true,
             correo: true,
             rol: true,
+            nivel: true,
             carrera_id: true,
+            celular: true,
+            telefono: true,
             carrera: {
               select: {
                 id: true,
@@ -93,6 +97,7 @@ const usuarioController = {
         select: {
           id: true,
           nombres: true,
+          apellidos: true,
           correo: true,
           rol: true,
           carrera_id: true,
