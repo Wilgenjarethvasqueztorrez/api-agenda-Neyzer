@@ -154,8 +154,8 @@ const authController = {
 
           usuario = await prisma.usuario.create({
             data: {
-              nombres: nombres,
-              apellidos: apellidos,
+              nombres,
+              apellidos,
               correo: email,
               rol: 'estudiante', // Rol por defecto para nuevos usuarios (en minúsculas según el enum)
               // carrera_id se puede actualizar después en el perfil

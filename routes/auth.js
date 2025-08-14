@@ -8,6 +8,8 @@ const router = express.Router();
 // Rutas públicas
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+router.post('/logout', authController.logout);
+
 
 // Rutas protegidas
 router.get('/profile', authenticateToken, authController.getProfile);

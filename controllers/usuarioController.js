@@ -100,7 +100,10 @@ const usuarioController = {
           apellidos: true,
           correo: true,
           rol: true,
+          nivel: true,
           carrera_id: true,
+          celular: true,
+          telefono: true,
           carrera: {
             select: {
               id: true,
@@ -175,9 +178,15 @@ const usuarioController = {
         select: {
           id: true,
           nombres: true,
+          apellidos: true,
           correo: true,
           rol: true,
+          nivel: true,
           carrera_id: true,
+          celular: true,
+          telefono: true,
+          carnet: true,
+          fecha: true,
           carrera: {
             select: {
               id: true,
@@ -274,9 +283,14 @@ const usuarioController = {
         select: {
           id: true,
           nombres: true,
+          apellidos: true,
           correo: true,
           rol: true,
+          nivel: true,
           carrera_id: true,
+          celular: true,
+          telefono: true,
+          carnet: true,
           carrera: {
             select: {
               id: true,
