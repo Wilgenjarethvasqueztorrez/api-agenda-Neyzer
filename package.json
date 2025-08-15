@@ -31,7 +31,7 @@
     "students",
     "teachers"
   ],
-  "author": "Neyzer Jose BEllorin Gutierrez",
+  "author": "Willgen Jareth Vasquez Torrez",
   "license": "MIT",
   "prisma": {
     "seed": "node prisma/seed.js"
